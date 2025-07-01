@@ -5,6 +5,7 @@ const { default: mongoose } = require("mongoose");
 
 const basicAuth = require('../middlewares/basicAuth')
 const apiKeyAuth = require('../middlewares/apiKeyAuth')
+const bearerToken = require("../middlewares/bearerToken");
 
 // Listar contatos
 router.get('/', basicAuth, async (req, res) => {
@@ -38,7 +39,7 @@ router.get('/:id', apiKeyAuth, async (req, res) => {
 
 
 // Criar contato
-router.post('/', async (req, res) => {
+router.post('/', bearerToken, async (req, res) => {
     const dados = await Contatos.create(req.body);
     res.status(200).json(dados)
 })

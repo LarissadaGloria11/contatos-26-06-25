@@ -16,8 +16,11 @@ router.post('/login', async (req, res) => {
     //const senhaCriptografada = await bcrypt.hash(senha, 10)
 
     const senhaValida = await bcrypt.compare(senha, dado.senha)
+    
     if (!senhaValida) {
         return res.status(401).json('Senha inválida')
+
+         
     }
 
     const token = JWT.sign({id:dado._id, email:dado.email}, process.env.JWT_SECRET, {
