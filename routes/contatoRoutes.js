@@ -8,6 +8,28 @@ const apiKeyAuth = require('../middlewares/apiKeyAuth')
 const bearerToken = require("../middlewares/bearerToken");
 
 // Listar contatos
+/**
+ * @swagger
+ * /:
+ *  get:
+ *      sumary: Listar todos os contados da api
+ *      tags: [Contatos]
+ *      responses:
+ *          200:
+ *              description: Lista de contatos
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              type: object
+ *                              properties:
+ *                                  nome:
+ *                                      type: string
+ *                                  telephone:
+ *                                      type: string
+ */
+
 router.get('/', basicAuth, async (req, res) => {
     const dados = await Contatos.find();
 
